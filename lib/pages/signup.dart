@@ -36,7 +36,8 @@ class _SignUpState extends State<SignUp> {
                   TextFormField(
                       onSaved: (value) => _email = value,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(labelText: "Dirección de Email")),
+                      decoration:
+                          InputDecoration(labelText: "Dirección de Email")),
                   TextFormField(
                       onSaved: (value) => _password = value,
                       obscureText: true,

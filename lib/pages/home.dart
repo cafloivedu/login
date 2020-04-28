@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
             RaisedButton(
                 child: Text("LOGOUT"),
                 onPressed: () async {
-                  await Provider.of<Auth>(context).logout();                  
+                  await Provider.of<Auth>(context).logout();
                 })
           ],
         ),
