@@ -9,8 +9,8 @@ import 'pages/login.dart';
 
 
 void main() => runApp(
-      ChangeNotifierProvider<AuthService>(
-        create: (context) => AuthService(),
+      ChangeNotifierProvider<Auth>(
+        create: (context) => Auth(),
         child: MyApp(),
       ),
     );
@@ -24,12 +24,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.teal),
       home: FutureBuilder(
         // get the Provider, and call the getUser method
-        future: Provider.of<AuthService>(context).getUser(),
+        future: Provider.of<Auth>(context).getUser(),
         // wait for the future to resolve and render the appropriate
         // widget for HomePage or LoginPage
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return snapshot.hasData ? HomePage() : LoginPage();
+            return snapshot.hasData ? Home() : Login();
           } else {
             return Container(color: Colors.white);
           }

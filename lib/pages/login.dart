@@ -3,12 +3,12 @@ import 'package:login/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginState createState() => _LoginState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   String _password;
   String _email;
@@ -23,23 +23,22 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.all(20.0),
             child: Form(
                 key: _formKey,
-                child:  new ListView(
-                  shrinkWrap: true,
-            children: <Widget>[
+                child: new ListView(shrinkWrap: true, children: <Widget>[
                   SizedBox(height: 20.0),
                   Text(
-                    'Login Information',
+                    'Información de Login',
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(height: 20.0),
                   TextFormField(
                       onSaved: (value) => _email = value,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(labelText: "Email Address")),
+                      decoration:
+                          InputDecoration(labelText: "Direccion de Email")),
                   TextFormField(
                       onSaved: (value) => _password = value,
                       obscureText: true,
-                      decoration: InputDecoration(labelText: "Password")),
+                      decoration: InputDecoration(labelText: "Contraseña")),
                   SizedBox(height: 20.0),
                   FlatButton(
                     child: Text("LOGIN"),
@@ -53,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (form.validate()) {
                         print("$_email $_password");
                       }
-                      var result = await Provider.of<AuthService>(context)
+                      var result = await Provider.of<Auth>(context)
                           .loginUser(email: _email, password: _password);
 
                       if (result != null) {
@@ -68,10 +67,10 @@ class _LoginPageState extends State<LoginPage> {
                       child: new Text('Crear una cuenta',
                           style: new TextStyle(
                               fontSize: 18.0, fontWeight: FontWeight.w300)),
-                      onPressed: () {                        
+                      onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
+                          MaterialPageRoute(builder: (context) => SignUp()),
                         );
                       })
                 ]))));
@@ -84,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
           title: Text('Advertencia'),
           content: Text(_message),
           actions: <Widget>[
-            FlatButton(                
+            FlatButton(
                 child: Text('Cancelar'),
                 color: Colors.tealAccent,
                 onPressed: () {

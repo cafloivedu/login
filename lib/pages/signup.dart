@@ -2,19 +2,18 @@ import 'package:login/models/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   String _password;
   String _email;
 
   @override
   void initState() {
-    print("SignUpPage init");
     super.initState();
   }
 
@@ -22,7 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Sign Up Page Flutter"),
+          title: Text("Sign Up"),
         ),
         body: Container(
             padding: EdgeInsets.all(20.0),
@@ -30,18 +29,18 @@ class _SignUpPageState extends State<SignUpPage> {
                 key: _formKey,
                 child: new ListView(shrinkWrap: true, children: <Widget>[
                   Text(
-                    'Sign Up Information',
+                    'Información de registro',
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(height: 20.0),
                   TextFormField(
                       onSaved: (value) => _email = value,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(labelText: "Email Address")),
+                      decoration: InputDecoration(labelText: "Dirección de Email")),
                   TextFormField(
                       onSaved: (value) => _password = value,
                       obscureText: true,
-                      decoration: InputDecoration(labelText: "Password")),
+                      decoration: InputDecoration(labelText: "Contraseña")),
                   SizedBox(height: 20.0),
                   RaisedButton(
                     child: Text("Sign Up"),
@@ -54,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (form.validate()) {
                         print("$_email $_password");
                       }
-                      var result = await Provider.of<AuthService>(context)
+                      var result = await Provider.of<Auth>(context)
                           .createUser(email: _email, password: _password);
 
                       if (result != null) {

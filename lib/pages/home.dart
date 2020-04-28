@@ -2,18 +2,17 @@ import 'package:login/models/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeState createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home Flutter Firebase"),
-        //actions: <Widget>[LogoutButton()],
       ),
       body: Center(
         child: Column(
@@ -24,9 +23,7 @@ class _HomePageState extends State<HomePage> {
             RaisedButton(
                 child: Text("LOGOUT"),
                 onPressed: () async {
-                  await Provider.of<AuthService>(context).logout();
-
-                  //Navigator.pushReplacementNamed(context, "/");
+                  await Provider.of<Auth>(context).logout();                  
                 })
           ],
         ),

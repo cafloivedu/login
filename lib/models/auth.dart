@@ -1,16 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class AuthService with ChangeNotifier {
+class Auth with ChangeNotifier {
   var currentUser;
   var createdEmail;
   var createdPass;
 
-  AuthService() {
-    print("new AuthService");
-    currentUser = null;
-    createdEmail = null;
-    createdPass = null;
+  Auth() {
+    currentUser = "";
+    createdEmail = "";
+    createdPass = "";
   }
 
   Future getUser() {
