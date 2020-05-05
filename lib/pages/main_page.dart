@@ -1,15 +1,41 @@
+import 'package:login/models/auth.dart';
+import 'package:login/pages/home.dart';
+import 'package:login/pages/login.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/auth.dart';
-import '../pages/home.dart';
-import '../pages/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:login/models/user_info.dart';
 
 class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
 }
 
+
 class _MainPageState extends State<MainPage> {
+  bool _logged = false;
+  Auth userModel = Auth();
+
+  @override
+  void initState(){
+    super.initState();
+    _loginStatus();
+  }
+
+  void _loginStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _logged = (prefs.getBool('logged') ?? false);
+      print(_logged);
+      if (_logged) {
+        String email = (prefs.getString('email') ?? 'null');
+        print(email);
+        userModel.load(email: email);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,18 +53,6 @@ class _MainPageState extends State<MainPage> {
             return Container(color: Colors.white);
           }
         },
-      ),
-    );
-  }
-}
-
-class LoadingCircle extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: CircularProgressIndicator(),
-        alignment: Alignment(0.0, 0.0),
       ),
     );
   }

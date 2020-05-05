@@ -17,11 +17,15 @@ class Auth with ChangeNotifier {
     createdPass = null;
   }
 
+  void load(name, token) {
+    userInfo = UserInfo.partialLoad(token, name);
+    notifyListeners();
+  }
+
   void manageJson(UserInfo classInfo) {
     userInfo = classInfo;
-    //saveLoginStatus(true);
-    //saveToken(usrInfo.token);
-    //saveName(userInfo.name);
+    saveLoginStatus(true);
+    saveToken(userInfo.token);
     saveEmail(userInfo.email);
     notifyListeners();
   }
@@ -30,18 +34,21 @@ class Auth with ChangeNotifier {
     return Future.value(currentUser);
   }
 
-  // wrappinhg the firebase calls
+  
   Future logout() {
     this.currentUser = null;
     notifyListeners();
+    saveLoginStatus(false);
     return Future.value(currentUser);
   }
 
-  // wrapping the firebase calls
-  Future createUser({String email, String password, String username, String name}) async {
+  
+  Future createUser(
+      {String email, String password, String username, String name}) async {
     createdEmail = email;
     createdPass = password;
-    signUpRequest(email: email,password: password, username: username, name: name);
+    signUpRequest(
+        email: email, password: password, username: username, name: name);
     return Future.value(1);
   }
 
@@ -64,6 +71,7 @@ class Auth with ChangeNotifier {
   Future loginUser2({String email}) {
     this.currentUser = {'email': email};
     notifyListeners();
+    
     return Future.value(currentUser);
   }
 
