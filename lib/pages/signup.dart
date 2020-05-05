@@ -57,11 +57,8 @@ class _SignUpState extends State<SignUp> {
                   RaisedButton(
                     child: Text("Sign Up"),
                     onPressed: () async {
-                      // save the fields..
                       final form = _formKey.currentState;
                       form.save();
-
-                      // Validate will return true if is valid, or false if invalid.
                       if (form.validate()) {
                         print("$_email $_password");
                       }

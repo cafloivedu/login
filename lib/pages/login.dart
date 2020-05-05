@@ -16,7 +16,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //key: _formKey,
         appBar: AppBar(
           title: Text("Login Page Flutter"),
         ),
@@ -45,11 +44,8 @@ class _LoginState extends State<Login> {
                     child: Text("LOGIN"),
                     color: Colors.tealAccent,
                     onPressed: () async {
-                      // save the fields..
                       final form = _formKey.currentState;
                       form.save();
-
-                      // Validate will return true if is valid, or false if invalid.
                       if (form.validate()) {
                         print("$_email $_password");
                       }
