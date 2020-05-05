@@ -30,8 +30,8 @@ class _MainPageState extends State<MainPage> {
       print(_logged);
       if (_logged) {
         String email = (prefs.getString('email') ?? 'null');
-        print(email);
-        userModel.load(email: email);
+        String pass = (prefs.getString('password') ?? 'null');
+        Home();
       }
     });
   }
@@ -48,11 +48,24 @@ class _MainPageState extends State<MainPage> {
         // widget for HomePage or LoginPage
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
+            print("snapshotdata");
+            print(snapshot.data);
             return snapshot.hasData ? Home() : Login();
           } else {
             return Container(color: Colors.white);
           }
         },
+      ),
+    );
+  }
+}
+class LoadingCircle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        child: CircularProgressIndicator(),
+        alignment: Alignment(0.0, 0.0),
       ),
     );
   }

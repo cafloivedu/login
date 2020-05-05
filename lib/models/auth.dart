@@ -22,11 +22,12 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  void manageJson(UserInfo classInfo) {
+  void manageJson(UserInfo classInfo, String pass) {
     userInfo = classInfo;
     saveLoginStatus(true);
     saveToken(userInfo.token);
     saveEmail(userInfo.email);
+    savePass(pass);
     notifyListeners();
   }
 
@@ -114,7 +115,7 @@ class Auth with ChangeNotifier {
     print('${response.statusCode}');
     if (response.statusCode == 200) {
       print("signin successful");
-      manageJson(UserInfo.fromSignUp(json.decode(response.body)));
+      manageJson(UserInfo.fromSignUp(json.decode(response.body)), password);
       notifyListeners();
       return userInfo;
     } else {
@@ -166,5 +167,11 @@ class Auth with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print('Saving logged into the shared preferences!');
     await prefs.setString('email', email);
+  }
+
+  void savePass(String pass) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('Saving logged into the shared preferences!');
+    await prefs.setString('password', pass);
   }
 }
