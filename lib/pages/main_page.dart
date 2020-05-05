@@ -32,6 +32,7 @@ class _MainPageState extends State<MainPage> {
         String email = (prefs.getString('email') ?? 'null');
         String pass = (prefs.getString('password') ?? 'null');
         print(email);
+        userModel.loginUser2(email: email);
         Home();
       }
     });
