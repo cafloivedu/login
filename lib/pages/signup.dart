@@ -11,6 +11,8 @@ class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   String _password;
   String _email;
+  String _username;
+  String _name;
 
   @override
   void initState() {
@@ -42,6 +44,15 @@ class _SignUpState extends State<SignUp> {
                       onSaved: (value) => _password = value,
                       obscureText: true,
                       decoration: InputDecoration(labelText: "Contraseña")),
+                  TextFormField(
+                      onSaved: (value) => _username = value,
+                      keyboardType: TextInputType.text,
+                      decoration:
+                          InputDecoration(labelText: "Nombre de usuario")),
+                  TextFormField(
+                      onSaved: (value) => _name = value,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(labelText: "Nombre")),
                   SizedBox(height: 20.0),
                   RaisedButton(
                     child: Text("Sign Up"),
@@ -54,8 +65,11 @@ class _SignUpState extends State<SignUp> {
                       if (form.validate()) {
                         print("$_email $_password");
                       }
-                      var result = await Provider.of<Auth>(context)
-                          .createUser(email: _email, password: _password);
+                      var result = await Provider.of<Auth>(context).createUser(
+                          email: _email,
+                          password: _password,
+                          username: _username,
+                          name: _name);
 
                       if (result != null) {
                         return _buildShowEDoneDioalog(context, "Hecho");

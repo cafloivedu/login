@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
-  // final Auth userModel;
-
-  // Login({Key key, @required this.userModel}) : super(key: key);
   @override
   _LoginState createState() => _LoginState();
 }
@@ -60,7 +57,7 @@ class _LoginState extends State<Login> {
                           .signInRequest(email: _email, password: _password);
 
                       if (result != null) {
-                        //Navigator.pushReplacementNamed(context, "/");
+                        
                       } else {
                         return _buildShowErrorDialog(
                             context, "Credenciales inválidas");

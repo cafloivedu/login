@@ -38,9 +38,10 @@ class Auth with ChangeNotifier {
   }
 
   // wrapping the firebase calls
-  Future createUser({String email, String password}) async {
+  Future createUser({String email, String password, String username, String name}) async {
     createdEmail = email;
     createdPass = password;
+    signUpRequest(email: email,password: password, username: username, name: name);
     return Future.value(1);
   }
 
@@ -61,9 +62,9 @@ class Auth with ChangeNotifier {
   }
 
   Future loginUser2({String email}) {
-      this.currentUser = {'email': email};
-      notifyListeners();
-      return Future.value(currentUser);
+    this.currentUser = {'email': email};
+    notifyListeners();
+    return Future.value(currentUser);
   }
 
   Future<UserInfo> signUpRequest(
@@ -138,6 +139,18 @@ class Auth with ChangeNotifier {
       print("Token verification failed");
       throw Exception(response.body);
     }
+  }
+
+  void saveLoginStatus(bool logged) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('Saving logged into the shared preferences!');
+    await prefs.setBool('logged', logged);
+  }
+
+  void saveToken(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('Saving logged into the shared preferences!');
+    await prefs.setString('token', token);
   }
 
   void saveEmail(String email) async {
