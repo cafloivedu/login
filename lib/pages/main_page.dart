@@ -31,6 +31,7 @@ class _MainPageState extends State<MainPage> {
       if (_logged) {
         String email = (prefs.getString('email') ?? 'null');
         String pass = (prefs.getString('password') ?? 'null');
+        print(email);
         Home();
       }
     });
@@ -42,10 +43,7 @@ class _MainPageState extends State<MainPage> {
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.teal),
       home: FutureBuilder(
-        // get the Provider, and call the getUser method
         future: Provider.of<Auth>(context).getUser(),
-        // wait for the future to resolve and render the appropriate
-        // widget for HomePage or LoginPage
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             print("snapshotdata");
@@ -55,17 +53,6 @@ class _MainPageState extends State<MainPage> {
             return Container(color: Colors.white);
           }
         },
-      ),
-    );
-  }
-}
-class LoadingCircle extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: CircularProgressIndicator(),
-        alignment: Alignment(0.0, 0.0),
       ),
     );
   }
