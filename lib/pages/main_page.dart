@@ -4,26 +4,18 @@ import '../models/auth.dart';
 import '../pages/home.dart';
 import '../pages/login.dart';
 
-class MainPage extends StatefulWidget{
-
+class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
 }
-  
+
 class _MainPageState extends State<MainPage> {
-
-  /* ChangeNotifierProvider<Auth>(
-          create: (context) => Auth(),
-          child: MyApp(),
-        ), */
-
-
   @override
-    Widget build(BuildContext context) {
-      return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(primarySwatch: Colors.teal),
-        home: FutureBuilder(
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(primarySwatch: Colors.teal),
+      home: FutureBuilder(
         // get the Provider, and call the getUser method
         future: Provider.of<Auth>(context).getUser(),
         // wait for the future to resolve and render the appropriate
@@ -38,7 +30,6 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
-  
 }
 
 class LoadingCircle extends StatelessWidget {

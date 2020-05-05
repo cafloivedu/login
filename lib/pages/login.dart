@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
+  // final Auth userModel;
+
+  // Login({Key key, @required this.userModel}) : super(key: key);
   @override
   _LoginState createState() => _LoginState();
 }
@@ -16,6 +19,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        //key: _formKey,
         appBar: AppBar(
           title: Text("Login Page Flutter"),
         ),
@@ -53,7 +57,7 @@ class _LoginState extends State<Login> {
                         print("$_email $_password");
                       }
                       var result = await Provider.of<Auth>(context)
-                          .loginUser(email: _email, password: _password);
+                          .signInRequest(email: _email, password: _password);
 
                       if (result != null) {
                         //Navigator.pushReplacementNamed(context, "/");

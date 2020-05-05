@@ -3,6 +3,7 @@ class User {
   String id = "";
   String email = "";
   String password = "";
+  String token = "";
 
   User(String email, String password) {
     this.id = CLASS_ID.toString();
