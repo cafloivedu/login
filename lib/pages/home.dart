@@ -77,7 +77,11 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           futureList = fetchCourses(username, token);
-          print(futureList.toString());
+          futureList.then((value) {
+            setState(() {
+              _courses= value;
+            });
+          });
           postCourse(username, token).then(
             (course) {
               addCourse(course);
