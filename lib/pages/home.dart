@@ -16,22 +16,25 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String token;
   String email;
+  String name;
+  String username;
   Future<List> futureList;
   List<CourseInfo> _courses = [];
-  String profilePicture = "https://api.adorable.io/avatars/285/${Random()}";
+  String profilePicture ="https://api.adorable.io/avatars/285";
 
   @override
   Widget build(BuildContext context) {
+    _readPreferences();
     return Scaffold(
-      drawer: new Drawer(
+      drawer: Drawer(
           child: new ListView(children: <Widget>[
         new UserAccountsDrawerHeader(
-            accountName: new Text("John Doe"),
-            accountEmail: new Text("random@example.com"),
+            accountName: new Text(name),
+            accountEmail: new Text(email),
             currentAccountPicture: new GestureDetector(
                 onTap: () => print(" selected user info "),
                 child: new CircleAvatar(
-                  backgroundImage: new NetworkImage(profilePicture),
+                  backgroundImage: new NetworkImage(profilePicture + email),
                 )),
             decoration: new BoxDecoration(
               image: new DecorationImage(
@@ -42,10 +45,17 @@ class _HomeState extends State<Home> {
         new ListTile(
           title: new Text("First Page"),
           trailing: new Icon(Icons.arrow_upward),
+          //llamar ventana
         ),
         new ListTile(
-          title: new Text("Second Page"),
+          title: new Text("Profesores"),
           trailing: new Icon(Icons.arrow_right),
+          //llamar ventana
+        ),
+        new ListTile(
+          title: new Text("Estudiantes"),
+          trailing: new Icon(Icons.arrow_right),
+          //llamar ventana
         ),
         new Divider(),
         new ListTile(
@@ -93,19 +103,19 @@ class _HomeState extends State<Home> {
 
   _readPreferences() async {
     final prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString('token') ?? "none";
-    // Check token
-    Provider.of<Auth>(context).checkToken(token)
-        // if it's valid, load data
-        .then((isValid) {
-      if (isValid) {
-        String name = prefs.getString('name');
-        String username = prefs.getString('username');
-        String email = prefs.getString('email');
-
-        futureList = fetchCourses(username, token);
-      } else {}
+    setState(() {
+      token = prefs.getString('token');
     });
+    setState(() {
+      name = prefs.getString('name');
+    });
+    setState(() {
+      username = prefs.getString('username');
+    });
+    setState(() {
+      email = prefs.getString('email');
+    });
+    //futureList = fetchCourses(username, token);
   }
 
   _removePreferences() async {
