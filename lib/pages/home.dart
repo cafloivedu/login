@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:login/actions/courses.dart';
 import 'package:login/models/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login/models/crew_title.dart';
 import 'package:login/models/user_info.dart';
 import 'package:provider/provider.dart';
 import 'package:login/models/course.dart';
@@ -75,20 +76,21 @@ class _HomeState extends State<Home> {
           itemBuilder: (context, index) => this._buildRow(index)),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //print(UserInfo().token);
-          _readPreferences();
-          // postCourse(UserInfo().username, UserInfo().token).then(
-          //   (course) {
-          //     addCourse(course);
-          //     print("intento");
-          //   },
-          // ).catchError(
-          //   (error) {
-          //     if (error.toString() == 'Unauthorized') {
-          //       _unauthorizedProtocol();
-          //     }
-          //   },
-          // );
+          futureList = fetchCourses(username, token);
+          print(futureList.toString());
+          postCourse(username, token).then(
+            (course) {
+              addCourse(course);
+              print("intento");
+              print(course.name);
+            },
+          ).catchError(
+            (error) {
+              if (error.toString() == 'Unauthorized') {
+                _unauthorizedProtocol();
+              }
+            },
+          );
         },
         child: Icon(Icons.add),
       ),
@@ -96,7 +98,7 @@ class _HomeState extends State<Home> {
   }
 
   _buildRow(int index) {
-    return Text("Item " + index.toString());
+    return CrewTitle(name: _courses[index].name,profesor: _courses[index].professorName,);
   }
 
   void addCourse(CourseInfo course) {
