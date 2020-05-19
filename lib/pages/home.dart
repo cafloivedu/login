@@ -16,24 +16,25 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String token;
   String email;
+  String name;
+  String username;
   Future<List> futureList;
   List<CourseInfo> _courses = [];
-  String profilePicture =
-      "https://api.adorable.io/avatars/285/${UserInfo().email}";
+  String profilePicture ="https://api.adorable.io/avatars/285";
 
   @override
   Widget build(BuildContext context) {
-    
+    _readPreferences();
     return Scaffold(
-      drawer: new Drawer(
+      drawer: Drawer(
           child: new ListView(children: <Widget>[
         new UserAccountsDrawerHeader(
-            accountName: new Text("${_readPreferences()}"),
-            accountEmail: new Text("${UserInfo().email}"),
+            accountName: new Text(name),
+            accountEmail: new Text(email),
             currentAccountPicture: new GestureDetector(
                 onTap: () => print(UserInfo().name),
                 child: new CircleAvatar(
-                  backgroundImage: new NetworkImage(profilePicture),
+                  backgroundImage: new NetworkImage(profilePicture + email),
                 )),
             decoration: new BoxDecoration(
               image: new DecorationImage(
@@ -44,14 +45,17 @@ class _HomeState extends State<Home> {
         new ListTile(
           title: new Text("Cursos"),
           trailing: new Icon(Icons.arrow_upward),
+          //llamar ventana
         ),
         new ListTile(
           title: new Text("Profesores"),
           trailing: new Icon(Icons.arrow_right),
+          //llamar ventana
         ),
         new ListTile(
           title: new Text("Estudiantes"),
           trailing: new Icon(Icons.arrow_right),
+          //llamar ventana
         ),
         new Divider(),
         new ListTile(
@@ -101,18 +105,18 @@ class _HomeState extends State<Home> {
 
   _readPreferences() async {
     final prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString('token') ?? "none";
-    // Check token
-    print(token);
-    String name = prefs.getString('name');
-    String username = prefs.getString('username');
-    String email = prefs.getString('email');
-    return UserInfo(
-      token: token,
-      username: username,
-      name: name,
-      email: email,
-    );
+    setState(() {
+      token = prefs.getString('token');
+    });
+    setState(() {
+      name = prefs.getString('name');
+    });
+    setState(() {
+      username = prefs.getString('username');
+    });
+    setState(() {
+      email = prefs.getString('email');
+    });
     //futureList = fetchCourses(username, token);
   }
 
