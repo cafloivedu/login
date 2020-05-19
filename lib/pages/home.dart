@@ -75,10 +75,11 @@ class _HomeState extends State<Home> {
           itemBuilder: (context, index) => this._buildRow(index)),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          postCourse(UserInfo().username, UserInfo().token).then(
+          postCourse(username, token).then(
             (course) {
               addCourse(course);
               print("intento");
+              print(course.name);
             },
           ).catchError(
             (error) {
