@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
             accountName: new Text(name),
             accountEmail: new Text(email),
             currentAccountPicture: new GestureDetector(
-                onTap: () => print(" selected user info "),
+                onTap: () => print(UserInfo().name),
                 child: new CircleAvatar(
                   backgroundImage: new NetworkImage(profilePicture + email),
                 )),
@@ -40,10 +40,10 @@ class _HomeState extends State<Home> {
               image: new DecorationImage(
                   fit: BoxFit.fill,
                   image: new NetworkImage(
-                      "https://img00.deviantart.net/35f0/i/2015/018/2/6/low_poly_landscape__the_river_cut_by_bv_designs-d8eib00.jpg")),
+                      "https://source.unsplash.com/random")),
             )),
         new ListTile(
-          title: new Text("First Page"),
+          title: new Text("Cursos"),
           trailing: new Icon(Icons.arrow_upward),
           //llamar ventana
         ),
@@ -75,19 +75,20 @@ class _HomeState extends State<Home> {
           itemBuilder: (context, index) => this._buildRow(index)),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          postCourse(username, token).then(
-            (course) {
-              addCourse(course);
-              print("intento");
-              print(course.name);
-            },
-          ).catchError(
-            (error) {
-              if (error.toString() == 'Unauthorized') {
-                _unauthorizedProtocol();
-              }
-            },
-          );
+          //print(UserInfo().token);
+          _readPreferences();
+          // postCourse(UserInfo().username, UserInfo().token).then(
+          //   (course) {
+          //     addCourse(course);
+          //     print("intento");
+          //   },
+          // ).catchError(
+          //   (error) {
+          //     if (error.toString() == 'Unauthorized') {
+          //       _unauthorizedProtocol();
+          //     }
+          //   },
+          // );
         },
         child: Icon(Icons.add),
       ),
