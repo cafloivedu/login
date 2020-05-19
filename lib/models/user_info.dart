@@ -6,6 +6,7 @@ class UserInfo {
 
   UserInfo({this.token, this.username, this.name, this.email});
 
+
   factory UserInfo.fromSignUp(Map<String, dynamic> json) {
     return UserInfo(
         token: json['token'],

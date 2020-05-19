@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:login/models/user_info.dart';
 import 'dart:convert';
@@ -149,6 +150,24 @@ class Auth with ChangeNotifier {
       throw Exception(response.body);
     }
   }
+
+  Future<bool> checkToken(String token) async {
+  Uri uri = Uri.https('https://movil-api.herokuapp.com/', 'check/token');
+  final http.Response response = await http.post(
+    uri,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader: "Bearer " + token,
+    },
+  );
+  if (response.statusCode == 200) {
+    Map<String, dynamic> body = json.decode(response.body);
+    bool isValid = body['valid'];
+    return isValid;
+  } else {
+    throw Exception('Failed to register user');
+  }
+}
 
   void saveLoginStatus(bool logged) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

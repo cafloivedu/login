@@ -12,6 +12,8 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   String _password;
   String _email;
+  String _token;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +50,13 @@ class _LoginState extends State<Login> {
                       form.save();
                       if (form.validate()) {
                         print("$_email $_password");
+                        
                       }
                       var result = await Provider.of<Auth>(context)
                           .signInRequest(email: _email, password: _password);
-
+                      
+                      _token = result.token;
+                      
                       if (result != null) {
                         
                       } else {
@@ -93,3 +98,4 @@ class _LoginState extends State<Login> {
     );
   }
 }
+
