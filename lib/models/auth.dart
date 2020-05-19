@@ -28,6 +28,8 @@ class Auth with ChangeNotifier {
     saveLoginStatus(true);
     saveToken(userInfo.token);
     saveEmail(userInfo.email);
+    saveName(userInfo.name);
+    saveUsername(userInfo.username);
     savePass(pass);
     notifyListeners();
   }
@@ -152,7 +154,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<bool> checkToken(String token) async {
-  Uri uri = Uri.https('https://movil-api.herokuapp.com/', 'check/token');
+  Uri uri = Uri.https('movil-api.herokuapp.com', 'check/token');
   final http.Response response = await http.post(
     uri,
     headers: <String, String>{
@@ -178,6 +180,7 @@ class Auth with ChangeNotifier {
   void saveToken(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print('Saving logged into the shared preferences!');
+    UserInfo(token: token);
     await prefs.setString('token', token);
   }
 
@@ -186,6 +189,18 @@ class Auth with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print('Saving logged into the shared preferences!');
     await prefs.setString('email', email);
+  }
+
+  void saveName(String name) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    UserInfo(name: name);
+    await prefs.setString('name', name);
+  }
+
+  void saveUsername(String username) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    UserInfo(username: username);
+    await prefs.setString('username', username);
   }
 
   void savePass(String pass) async {
