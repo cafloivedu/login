@@ -12,6 +12,8 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   String _password;
   String _email;
+  String _token;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +46,19 @@ class _LoginState extends State<Login> {
                     child: Text("LOGIN"),
                     color: Colors.tealAccent,
                     onPressed: () async {
-                      // save the fields..
                       final form = _formKey.currentState;
                       form.save();
-
-                      // Validate will return true if is valid, or false if invalid.
                       if (form.validate()) {
                         print("$_email $_password");
+                        
                       }
                       var result = await Provider.of<Auth>(context)
-                          .loginUser(email: _email, password: _password);
-
+                          .signInRequest(email: _email, password: _password);
+                      
+                      _token = result.token;
+                      
                       if (result != null) {
-                        //Navigator.pushReplacementNamed(context, "/");
+                        
                       } else {
                         return _buildShowErrorDialog(
                             context, "Credenciales inválidas");
@@ -96,3 +98,4 @@ class _LoginState extends State<Login> {
     );
   }
 }
+
