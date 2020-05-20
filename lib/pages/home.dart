@@ -55,17 +55,15 @@ class _HomeState extends State<Home> {
             Navigator.of(context).pop();
           },
         ),
-        new ListTile(
-          title: new Text("Profesores"),
-          trailing: new Icon(Icons.arrow_right),
-          //llamar ventana
-        ),
-        new ListTile(
-          title: new Text("Estudiantes"),
-          trailing: new Icon(Icons.arrow_right),
-          //llamar ventana
-        ),
         new Divider(),
+        new ListTile(
+          title: new Text("Cerrar Sesión"),
+          onTap: () async {
+            Navigator.of(context).pop();
+            await Provider.of<Auth>(context).logout();
+          },
+          trailing: new Icon(Icons.cancel),
+        ),
         new ListTile(
           title: new Text("Cerrar Sesión"),
           onTap: () async {
