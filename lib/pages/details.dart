@@ -31,7 +31,7 @@ class _UserDetailsState extends State<UserDetails> {
           child: ListTile(
             leading: CircleAvatar(
               radius: 25.0,
-              backgroundColor: Colors.brown,
+              backgroundImage: NetworkImage("https://api.adorable.io/avatars/285/"+widget.username),
             ),
             title: Text(''),
             subtitle: Text('Last Name: '),
