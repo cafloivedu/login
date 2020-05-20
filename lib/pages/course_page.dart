@@ -71,12 +71,18 @@ class _CourseViewState extends State<CourseView> {
             ),
           ),
         ),
-      ],
-      ),
-      ListView.builder(
+        Container(
+        height: 500,
+        color: Colors.white,
+        child: new ListView.builder(
         itemCount: course.students.length,
         itemBuilder: (context, index) => this._buildRow(index),
         ),
+      ),
+      ],
+      ),
+      
+      
     );
   }
 
