@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:login/actions/courses.dart';
+import 'package:login/actions/person.dart';
 import 'package:login/models/course.dart';
+import 'package:login/models/person.dart';
 import 'package:login/models/students_card.dart';
+import 'package:login/pages/details.dart';
 
 class CourseView extends StatefulWidget {
   final String pageName;
@@ -16,6 +19,7 @@ class CourseView extends StatefulWidget {
 
 class _CourseViewState extends State<CourseView> {
   Course course;
+  Person user;
 
   @override
   void initState() {
@@ -50,14 +54,15 @@ class _CourseViewState extends State<CourseView> {
           new Card(
             margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0),
             child: InkWell(
-              // onTap: () {
-              //   Navigator.of(context).push(new MaterialPageRoute(
-              //       builder: (BuildContext context) => CourseView(
-              //           pageName: name,
-              //           username: username,
-              //           token: token,
-              //           courseId: courseId)));
-              // },
+              onTap: () async {
+                await fetchProfessor(widget.username, course.professor.id, widget.token).then((value) => {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => UserDetails(
+                      courseId: value.courseId, name: value.name, username: value.username, email: value.email, phone: value.phone, city: value.city, country: value.country, birth: value.birthday
+                    )))
+                });  
+                  
+              },
               child: ListTile(
                 leading: CircleAvatar(
                   radius: 25.0,
