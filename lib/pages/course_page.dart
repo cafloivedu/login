@@ -50,11 +50,19 @@ class _CourseViewState extends State<CourseView> {
           new Card(
             margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0),
             child: InkWell(
-              //onTap: () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => CourseView(pageName: name, username: username, token: token, courseId: courseId,))),
+              // onTap: () {
+              //   Navigator.of(context).push(new MaterialPageRoute(
+              //       builder: (BuildContext context) => CourseView(
+              //           pageName: name,
+              //           username: username,
+              //           token: token,
+              //           courseId: courseId)));
+              // },
               child: ListTile(
                 leading: CircleAvatar(
                   radius: 25.0,
-                  backgroundImage: NetworkImage("https://api.adorable.io/avatars/285/${course.professor.username}"),
+                  backgroundImage: NetworkImage(
+                      "https://api.adorable.io/avatars/285/${course.professor.username}"),
                 ),
                 title: Text(course.professor.name),
                 subtitle: Text('Email: ${course.professor.email}'),
