@@ -77,9 +77,6 @@ class _LoginState extends State<Login> {
                       }
                       var result = await Provider.of<Auth>(context)
                           .signInRequest(email: _email, password: _password);
-                      
-                      _token = result.token;
-                      
                       if (result != null) {
                         
                       } else {
