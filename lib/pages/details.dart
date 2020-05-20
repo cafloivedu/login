@@ -44,14 +44,14 @@ class _UserDetailsState extends State<UserDetails> {
             child: ListView(
               children: <Widget>[
                 Text(
-                'Email: '+widget.email,
+                ''+widget.email,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
                 ),
               ),
               Text(
-                'City: '+widget.city,
+                ''+widget.city,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
@@ -65,7 +65,7 @@ class _UserDetailsState extends State<UserDetails> {
                 ),
               ),
               Text(
-                'Phone number: '+widget.phone,
+                'Phone: '+widget.phone,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
