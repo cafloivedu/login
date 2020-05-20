@@ -106,6 +106,10 @@ class _HomeState extends State<Home> {
     return CrewTitle(
       name: _courses[index].name,
       profesor: _courses[index].professorName,
+      username: username,
+      courseId: _courses[index].id,
+      token: token,
+      students: _courses[index].students,
     );
   }
 
