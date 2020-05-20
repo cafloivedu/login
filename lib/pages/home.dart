@@ -2,10 +2,11 @@ import 'package:login/actions/courses.dart';
 import 'package:login/models/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login/models/crew_title.dart';
-import 'package:login/models/user_info.dart';
+import 'package:login/pages/course_page.dart';
 import 'package:provider/provider.dart';
 import 'package:login/models/course.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:login/pages/course_page.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -72,8 +73,9 @@ class _HomeState extends State<Home> {
         title: Text("Cursos"),
       ),
       body: ListView.builder(
-          itemCount: this._courses.length,
-          itemBuilder: (context, index) => this._buildRow(index)),
+        itemCount: this._courses.length,
+        itemBuilder: (context, index) => this._buildRow(index),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           futureList = fetchCourses(username, token);
@@ -85,7 +87,6 @@ class _HomeState extends State<Home> {
           postCourse(username, token).then(
             (course) {
               addCourse(course);
-              print("intento");
               print(course.name);
             },
           ).catchError(
