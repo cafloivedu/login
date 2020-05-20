@@ -2,11 +2,9 @@ import 'package:login/actions/courses.dart';
 import 'package:login/models/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login/models/crew_title.dart';
-import 'package:login/pages/course_page.dart';
 import 'package:provider/provider.dart';
 import 'package:login/models/course.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:login/pages/course_page.dart';
 
 class Home extends StatefulWidget {
   @override
