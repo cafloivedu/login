@@ -12,6 +12,8 @@ class StudentsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
+      child: InkWell(
+        onTap: ,
       child: Card(
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0),
         child: ListTile(
@@ -23,6 +25,7 @@ class StudentsCard extends StatelessWidget {
           subtitle: Text('Email: $email'),
         ),
       ),
+    ),
     );
   }
 }
