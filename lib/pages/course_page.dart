@@ -33,7 +33,8 @@ class _CourseViewState extends State<CourseView> {
         title: Text(course.name),
       ),
       body: new ListView(
-        children<Widget>[: new Card(
+        children:<Widget>[ 
+        new Card(
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0),
 
           child: InkWell(
@@ -48,7 +49,7 @@ class _CourseViewState extends State<CourseView> {
             ),
           ), //new Text(course.professor.name),
         ),
-        ]
+        ],
       ),
     );
   }
