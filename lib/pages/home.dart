@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:login/actions/courses.dart';
 import 'package:login/models/auth.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +19,7 @@ class _HomeState extends State<Home> {
   String username;
   Future<List> futureList;
   List<CourseInfo> _courses = [];
-  String profilePicture ="https://api.adorable.io/avatars/285";
+  String profilePicture = "https://api.adorable.io/avatars/285/";
 
   @override
   Widget build(BuildContext context) {
@@ -33,20 +31,22 @@ class _HomeState extends State<Home> {
             accountName: new Text(name),
             accountEmail: new Text(email),
             currentAccountPicture: new GestureDetector(
-                onTap: () => print(UserInfo().name),
+                onTap: () => print(name),
                 child: new CircleAvatar(
                   backgroundImage: new NetworkImage(profilePicture + email),
                 )),
             decoration: new BoxDecoration(
               image: new DecorationImage(
                   fit: BoxFit.fill,
-                  image: new NetworkImage(
-                      "https://source.unsplash.com/random")),
+                  image:
+                      new NetworkImage("https://source.unsplash.com/random")),
             )),
         new ListTile(
           title: new Text("Cursos"),
           trailing: new Icon(Icons.arrow_upward),
-          //llamar ventana
+          onTap: () {
+            Navigator.of(context).pop();
+          },
         ),
         new ListTile(
           title: new Text("Profesores"),
@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
           futureList = fetchCourses(username, token);
           futureList.then((value) {
             setState(() {
-              _courses= value;
+              _courses = value;
             });
           });
           postCourse(username, token).then(
@@ -102,7 +102,10 @@ class _HomeState extends State<Home> {
   }
 
   _buildRow(int index) {
-    return CrewTitle(name: _courses[index].name,profesor: _courses[index].professorName,);
+    return CrewTitle(
+      name: _courses[index].name,
+      profesor: _courses[index].professorName,
+    );
   }
 
   void addCourse(CourseInfo course) {
