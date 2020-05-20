@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
+
+  bool check = false;
 }
 
 class _LoginState extends State<Login> {
@@ -41,6 +43,29 @@ class _LoginState extends State<Login> {
                       onSaved: (value) => _password = value,
                       obscureText: true,
                       decoration: InputDecoration(labelText: "Contraseña")),
+                  SizedBox(height: 20.0),
+                  CheckboxListTile(
+                    value: widget.check,
+                    onChanged: (val) {
+                      if (widget.check == false) {
+                        setState(() {
+                          widget.check = true;
+                        });
+                          
+                      } else if (widget.check == true) {
+                        setState(() {
+                          widget.check = false;
+                        });
+                          
+                      }
+                    },
+                    title: new Text(
+                      'Stay logged in.',
+                      style: TextStyle(fontSize: 14.0),
+                    ),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    activeColor: Colors.green,
+                  ),
                   SizedBox(height: 20.0),
                   FlatButton(
                     child: Text("LOGIN"),
