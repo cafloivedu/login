@@ -103,6 +103,9 @@ class _CourseViewState extends State<CourseView> {
       name: course.students[index].name,
       email: course.students[index].email,
       username: course.students[index].username,
+      id: course.students[index].id,
+      token: widget.token,
+      dbId: widget.username,
     );
   }
 }
