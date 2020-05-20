@@ -66,6 +66,7 @@ class _HomeState extends State<Home> {
                 _courses = value;
               });
             });
+            Navigator.of(context).pop();
           },
           trailing: new Icon(Icons.cancel),
         ),
@@ -86,7 +87,7 @@ class _HomeState extends State<Home> {
           itemCount: this._courses.length,
           itemBuilder: (context, index) => this._buildRow(index),
         ),
-        onRefresh: () {
+        onRefresh: () async {
           futureList = fetchCourses(username, token);
           futureList.then((value) {
             setState(() {
@@ -97,6 +98,12 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          futureList = fetchCourses(username, token);
+          futureList.then((value) {
+            setState(() {
+              _courses = value;
+            });
+          });
           postCourse(username, token).then(
             (course) {
               addCourse(course);
