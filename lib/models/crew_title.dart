@@ -20,8 +20,8 @@ class CrewTitle extends StatelessWidget {
           onTap: () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => CourseView(pageName: name, username: username, token: token, courseId: courseId,))),
           child: ListTile(
             leading: CircleAvatar(
+              child: Icon(Icons.book),
               radius: 25.0,
-              backgroundImage: NetworkImage("https://api.adorable.io/avatars/285/"+username),
             ),
             title: Text(name),
             subtitle: Text('Profesor: $profesor, Estudiantes: $students'),
