@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 class CourseView extends StatelessWidget {
   
   final String pageName;
+  final String token;
+  final String courseId;
+  final String username;
 
-  CourseView(this.pageName);
+  CourseView({this.pageName, this.username, this.token, this.courseId});
 
   @override
   Widget build(BuildContext context) {

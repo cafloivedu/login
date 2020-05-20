@@ -13,7 +13,7 @@ class CrewTitle extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0),
         child: InkWell(
-          onTap: () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => CourseView("Info del Curso"))),
+          onTap: () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => CourseView(pageName: "Info del Curso"))),
           child: ListTile(
             leading: CircleAvatar(
               radius: 25.0,
