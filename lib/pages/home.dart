@@ -59,8 +59,13 @@ class _HomeState extends State<Home> {
         new ListTile(
           title: new Text("Limpiar BDD"),
           onTap: () async {
-            Navigator.of(context).pop();
-            await Provider.of<Auth>(context).logout();
+            await resetDB(username, token);
+            futureList = fetchCourses(username, token);
+            futureList.then((value) {
+            setState(() {
+              _courses = value;
+            });
+          });
           },
           trailing: new Icon(Icons.cancel),
         ),
