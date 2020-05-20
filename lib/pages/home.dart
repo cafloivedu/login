@@ -23,8 +23,14 @@ class _HomeState extends State<Home> {
   String profilePicture = "https://api.adorable.io/avatars/285/";
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    // load data on startup
     _readPreferences();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
           child: new ListView(children: <Widget>[
