@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
         ),
         new Divider(),
         new ListTile(
-          title: new Text("Cerrar Sesión"),
+          title: new Text("Limpiar BDD"),
           onTap: () async {
             Navigator.of(context).pop();
             await Provider.of<Auth>(context).logout();
