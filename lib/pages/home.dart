@@ -62,10 +62,10 @@ class _HomeState extends State<Home> {
             await resetDB(username, token);
             futureList = fetchCourses(username, token);
             futureList.then((value) {
-            setState(() {
-              _courses = value;
+              setState(() {
+                _courses = value;
+              });
             });
-          });
           },
           trailing: new Icon(Icons.cancel),
         ),
@@ -81,18 +81,22 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text("Cursos"),
       ),
-      body: ListView.builder(
-        itemCount: this._courses.length,
-        itemBuilder: (context, index) => this._buildRow(index),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
+      body: RefreshIndicator(
+        child: ListView.builder(
+          itemCount: this._courses.length,
+          itemBuilder: (context, index) => this._buildRow(index),
+        ),
+        onRefresh: () {
           futureList = fetchCourses(username, token);
           futureList.then((value) {
             setState(() {
               _courses = value;
             });
           });
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
           postCourse(username, token).then(
             (course) {
               addCourse(course);
