@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class StudentsCard extends StatelessWidget {
 
   final String name;
-  StudentsCard({this.name});
+  final String email;
+  final String username;
+  StudentsCard({this.name, this.email,this.username});
 
 
   @override
@@ -18,7 +20,7 @@ class StudentsCard extends StatelessWidget {
             backgroundColor: Colors.brown,
           ),
           title: Text(name),
-          subtitle: Text('Last Name: '),
+          subtitle: Text('Email: $email'),
         ),
       ),
     );

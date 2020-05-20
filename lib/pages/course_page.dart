@@ -87,7 +87,7 @@ class _CourseViewState extends State<CourseView> {
   }
 
   _buildRow(int index) {
-    return StudentsCard(name: course.students[index].name);
+    return StudentsCard(name: course.students[index].name, email: course.students[index].email,username: course.students[index].username,);
   }
 
 }
