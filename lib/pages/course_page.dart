@@ -58,7 +58,7 @@ class _CourseViewState extends State<CourseView> {
                 await fetchProfessor(widget.username, course.professor.id, widget.token).then((value) => {
                   Navigator.of(context).push(new MaterialPageRoute(
                     builder: (BuildContext context) => UserDetails(
-                      courseId: value.courseId, name: value.name, username: value.username, email: value.email, phone: value.phone, city: value.city, country: value.country, birth: value.birthday
+                      courseId: value.courseId, name: value.name, username: value.username, email: value.email, phone: value.phone, city: value.city, country: value.country, birth: value.birthday.substring(0,10)
                     )))
                 });  
                   
